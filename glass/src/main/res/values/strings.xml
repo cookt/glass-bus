@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">GlassBus</string>
+    <string name="title_activity_main">Hello World Immersion</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_media_display_immersion">Media Display Immersion</string>
+</resources>
