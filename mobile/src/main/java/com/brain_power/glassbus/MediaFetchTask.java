@@ -5,7 +5,6 @@ import android.os.AsyncTask;
 import android.util.Pair;
 
 import com.brain_power.glassbus.backend.glassBus.GlassBus;
-import com.brain_power.glassbus.backend.glassBus.model.EndpointResponse;
 import com.brain_power.glassbus.backend.glassBus.model.GetResponse;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;

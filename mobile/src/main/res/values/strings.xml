@@ -7,10 +7,10 @@
     <string name="get_file">Get File</string>
     <string name="image_title">Image :</string>
     <string name="picture_title">GlassBus Demo</string>
-    <string name="file_upload">File Upload Activity</string>
+    <string name="file_upload">Data Upload Activity</string>
     <string name="help">Help</string>
     <string name="title_activity_file_upload">FileUploadActivity</string>
-    <string name="generage_data">Generate Data</string>
+    <string name="generate_data">Generate Data</string>
     <string name="data_view_text">Randomly generated data will appear here</string>
     <string name="send_data">Send Data</string>
 </resources>

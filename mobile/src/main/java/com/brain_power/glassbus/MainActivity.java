@@ -4,6 +4,7 @@ import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -44,8 +45,8 @@ public class MainActivity extends Activity implements TaskListener, View.OnClick
 		statusText=(TextView) findViewById(R.id.statusText);
 		mImageView=(ImageView) findViewById(R.id.imageView);
 
-		AccountManager accountManager = AccountManager.get(this);
-		Account gmail=accountManager.getAccountsByType("com.gmail")[0];
+//		AccountManager accountManager = AccountManager.get(this);
+//		Account gmail=accountManager.getAccountsByType("com.gmail")[0];
 	}
 
 	@Override
@@ -67,6 +68,8 @@ public class MainActivity extends Activity implements TaskListener, View.OnClick
 			case (R.id.action_settings):
 				return true;
 			case (R.id.file_save):
+				Intent i=new Intent(this, FileUploadActivity.class);
+				startActivity(i);
 				return true;
 			default:
 				return super.onOptionsItemSelected(item);
@@ -86,7 +89,7 @@ public class MainActivity extends Activity implements TaskListener, View.OnClick
 			statusText.setText(status);
 			mImageView.setImageBitmap(bitmap);
 		} else{
-
+			Toast.makeText(this, "Media fetch status: "+status,Toast.LENGTH_SHORT).show();
 		}
 	}
 

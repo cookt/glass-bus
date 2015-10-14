@@ -1,22 +1,42 @@
 package com.brain_power.glassbus;
 
 import android.app.Activity;
-import android.support.v7.app.ActionBarActivity;
+import android.content.Context;
 import android.os.Bundle;
+import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import com.brain_power.glassbus.backend.glassBus.model.EndpointResponse;
+import com.brain_power.glassbus.backend.glassBus.model.DataBean;
 import com.brain_power.glassbus.backend.glassBus.model.PostResponse;
+import com.google.api.client.util.DateTime;
+
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 
 
 public class FileUploadActivity extends Activity implements TaskListener, View.OnClickListener{
+	private DataBean sample=null;
 
+	private TextView dataView;
+	private Button genData;
+	private Button sendData;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_file_upload);
+		dataView=(TextView) findViewById(R.id.data_text);
+		genData=(Button) findViewById(R.id.generate_data_button);
+		sendData=(Button) findViewById(R.id.send_data_button);
+
+		genData.setOnClickListener(this);
+		sendData.setOnClickListener(this);
+
 	}
 
 	@Override
@@ -53,8 +73,11 @@ public class FileUploadActivity extends Activity implements TaskListener, View.O
 				populateTextViewWithData();
 				break;
 			case(R.id.send_data_button):
-
-
+				if (sample!=null){
+					new DataUploadTask().execute(new Pair<Context, DataBean>(this, sample));
+				} else{
+					Toast.makeText(this, "Generate some data",Toast.LENGTH_SHORT).show();
+				}
 				break;
 			default:
 				break;
@@ -67,7 +90,12 @@ public class FileUploadActivity extends Activity implements TaskListener, View.O
 		PostResponse response=(PostResponse) data;
 	}
 
-	private void populateTextViewWithData(){
-
-	}
+	public void populateTextViewWithData(){
+		sample=new DataBean();
+		sample.setStringData("Test data");
+		List<Double> doubleData=Arrays.asList(1.,3.,.4,9.);
+		sample.setDoubles(doubleData);
+		sample.setDate(new DateTime(new Date()));
+		dataView.setText(sample.toString());
+;	}
 }

@@ -11,12 +11,16 @@ import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.datastore.KeyFactory;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+
 
 import javax.inject.Named;
 import javax.xml.bind.DatatypeConverter;
@@ -25,7 +29,7 @@ import com.google.appengine.api.users.User;
 /**
  * An endpoint class we are exposing
  */
-@Api(name = "glassBus", version = "v1", namespace = @ApiNamespace(ownerDomain = "backend.glassbus.brain_power.com", ownerName = "backend.glassbus.brain_power.com", packagePath = ""))
+@Api(name = "glassBus", version = "v2", namespace = @ApiNamespace(ownerDomain = "backend.glassbus.brain_power.com", ownerName = "backend.glassbus.brain_power.com", packagePath = ""))
 public class MyEndpoint {
 	private static final int ONE_MEGABYTE=1024*1024;
 	/**
@@ -35,7 +39,7 @@ public class MyEndpoint {
 	public DataBean sayHi(@Named("name") String name)
 	{
 		DataBean response = new DataBean();
-		response.setData("Hi, " + name);
+		response.setStringData("Hi, " + name);
 
 		return response;
 	}
@@ -101,10 +105,17 @@ public class MyEndpoint {
 	public PostResponse sendData(DataBean dataBean)
 	{
 		DatastoreService datastore= DatastoreServiceFactory.getDatastoreService();
+		Key key= KeyFactory.createKey("string_data", dataBean.getStringData());
 
+		Entity data=new Entity(key);
 
+		datastore.put(data);
 
-		return new PostResponse();
+		DataBean responseData=new DataBean();
+		responseData.setStringData("Success");
+		PostResponse response=new PostResponse();
+		response.setData(responseData);
+		return response;
 	}
 
 }

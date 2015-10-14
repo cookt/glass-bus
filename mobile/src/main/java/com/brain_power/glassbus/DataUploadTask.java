@@ -6,7 +6,6 @@ import android.util.Pair;
 
 import com.brain_power.glassbus.backend.glassBus.GlassBus;
 import com.brain_power.glassbus.backend.glassBus.model.DataBean;
-import com.brain_power.glassbus.backend.glassBus.model.EndpointResponse;
 import com.brain_power.glassbus.backend.glassBus.model.PostResponse;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
